@@ -1,0 +1,114 @@
+# general settings
+name: GaussianGrayDenoising_Restormer
+model_type: ImageCleanModel
+scale: 1
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 100
+is_train: true
+
+preprocessing:
+  image-path-raw: "/home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/raw_data"
+  output: "/home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/transformed_data/"
+  train-split-percentage: 0.8
+
+datasets:
+  train:
+    prefetch_mode: cuda
+    iters: [300000]
+    mini_batch_sizes: [1]
+    gt_size: 128   
+    gt_sizes: [128]
+    batch_size_per_gpu: 1
+    
+
+dataloader:
+  phase: val #train
+  batch_size: 1
+  num_worker: 2
+  shuffle: True
+  pin_memory: False
+  batch_size_per_gpu: 1
+  iters: 300000
+
+# network structures
+network_g:
+  type: Restormer
+  inp_channels: 1
+  out_channels: 1
+  dim: 48 #48
+  num_blocks: [4,6,6,8] 
+  num_refinement_blocks: 4
+  heads: [1,2,4,8]
+  ffn_expansion_factor: 2.66
+  bias: False
+  LayerNorm_type: BiasFree
+  dual_pixel_task: False
+
+
+path:
+  pretrain_network_g: /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/basicsr/gaussian_gray_denoising_blind.pth
+  strict_load_g: true
+  resume_state: ~ # /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/model/training_states/4000.state
+  experiments_root:  /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/visualization/temp
+  ignore_resume_networks: true
+  models: /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/model
+  training_states: /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/model/training_states
+  # log: /home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/visualization
+
+
+# logging settings
+logger:
+  print_freq: 1000
+  save_checkpoint_freq: !!float 4e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# training settings
+
+train:
+  total_iter: 120000
+  warmup_iter: -1 # no warm up
+  use_grad_clip: true
+
+  # Split 300k iterations into two cycles. 
+  # 1st cycle: fixed 3e-4 LR for 92k iters. 
+  # 2nd cycle: cosine annealing (3e-4 to 1e-6) for 208k iters.
+  scheduler:
+    type: CosineAnnealingRestartCyclicLR
+    periods: [30000, 70000]       
+    restart_weights: [1,1]
+    eta_mins: [0.0003,0.000001]   
+  
+  mixing_augs:
+    mixup: true
+    mixup_beta: 1.2
+    use_identity: true
+
+  optim_g:
+    type: AdamW
+    lr: !!float 3e-4
+    weight_decay: !!float 1e-4
+    betas: [0.85, 0.999]
+  
+  # losses
+  pixel_opt:
+    type: PSNRLoss #CharbonnierLoss #L1Loss
+    loss_weight: 1
+    reduction: mean
+
+# validation settings
+val:
+  window_size: 8
+  val_freq: !!float 4e3
+  save_img: false
+  rgb2bgr: true
+  use_image: false
+  max_minibatch: 8
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false

@@ -1,0 +1,17 @@
+{
+    "notebooks": "",
+    "references": "",
+    "reports": "",
+    "src": {
+        "lib": "",
+        "data": {
+            "raw_data": " ",
+            "transformed_data": " ",
+            "logs":" ",
+            "config": " "
+        },
+        "features": "",
+        "models": "",
+        "visualization": ""
+    }
+}
