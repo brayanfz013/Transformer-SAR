@@ -7,9 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-torch = {version="^2.2.1", source="torch"}
-torchaudio = { version = "^2.2.0", source="torch"}
-torchvision = { version = "^0.17", source="torch"}
+torch = { version = "^2.2.1", source = "torch" }
+torchaudio = { version = "^2.2.0", source = "torch" }
+torchvision = { version = "^0.17", source = "torch" }
 matplotlib = "^3.8.3"
 scikit-learn = "^1.4.1.post1"
 scikit-image = "^0.22.0"
@@ -46,8 +46,7 @@ jupyterlab = "^4.2.0"
 
 name = "torch"
 url = "https://download.pytorch.org/whl/cu121"
-priority  = "supplemental"
-
+priority = "supplemental"
 
 
 [tool.poetry.group.dev.dependencies]
