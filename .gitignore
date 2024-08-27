@@ -16,13 +16,11 @@ __pycache__
 *.egg*
 tb_logger/*
 *.tiff
-*.png
 *.jpg
 *:Zone.Identifier
 **.pth
 **.tiff
 **:Zone.Identifier
-**.png
 **.mdb
 events.**
 **/events.**
