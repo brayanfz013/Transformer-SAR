@@ -73,7 +73,7 @@ las cuales estan divididas en las siguientes carpetas:
 | Carpeta  | Descripcion | 
 | ------------- | ------------- | 
 | __raw_data__  | Ruta  de imagnes descargadas de satelite  |
-| __transfomed_data__  | Ruta donde se almacenaron los datos aumentados Cell  |
+| __transfomed_data__  | Ruta donde se almacenaron los datos aumentados |
 | __modelo__  | Ruta donde se encuntran los modelos preentrenados |
 | __Noisy_Val__  |Son las imagenes con ruido usadas para la validacion  |
 | __validation_data_report__  | Ruta donde se encuentran las imagenes de validas descargadas de  satelite (validacion por el modelo SwinIR) 
