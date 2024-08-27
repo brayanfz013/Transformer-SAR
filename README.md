@@ -69,14 +69,30 @@ imagenes enlace : [[Google Drive]](https://drive.google.com/drive/folders/1aRysh
 
 las cuales estan divididas en las siguientes carpetas:
 
+| Carpeta | Contenido | Formato de archivos | Observaciones |
+|---|---|---|---|
+| 01_Imagenes Restauradas |  |  |  |
+|   | Ground Truth | Imágenes originales | Descargadas de satélite |
+|   | Noisy | Imágenes con ruido artificial |  |
+|   | Modelo Restormer |  |  |
+|   |   | CharbonierLoss |  |
+|   |   |   | Imágenes: Número_image_NumeroModelo.jpg |
+|   |   |   | Modelos: Listado de modelos |
+|   |   | L1Loss_0_99 |  |
+|   |   |   | Imágenes: Número_image_NumeroModelo.jpg |
+|   |   |   | Modelos: Listado de modelos |
+|   |   | PSNR |  |
+|   |   |   | Imágenes: Número_image_NumeroModelo.jpg |
+|   |   |   | Modelos: Listado de modelos |
+|   | Modelo Uformer |  |  |
+|   |   | Imágenes Restauradas Uformer |  |
+|   |   | Modelos | Modelo único |
+| Noisy_val | Imágenes descargadas de satélite |  | Validación por SwinIR |
+| Transformer_data | Datos aumentados |  |  |
+| raw_data | Imágenes descargadas de satélite |  |  |
+| validation_data_report | Imágenes de validación |  | Entregadas originalmente |
 
-| Carpeta  | Descripcion | 
-| ------------- | ------------- | 
-| __raw_data__  | Ruta  de imagnes descargadas de satelite  |
-| __transfomed_data__  | Ruta donde se almacenaron los datos aumentados |
-| __modelo__  | Ruta donde se encuntran los modelos preentrenados |
-| __Noisy_Val__  |Son las imagenes con ruido usadas para la validacion  |
-| __validation_data_report__  | Ruta donde se encuentran las imagenes de validas descargadas de  satelite (validacion por el modelo SwinIR) 
+![alt text](<Mapa Google Drive.png>)
 
 ## Entrenamiento e Inferencia
 
@@ -111,6 +127,5 @@ Si quiere citar el paper del uformer  y el Restomer considere:
     year={2022}
 }
 ```
-This code borrows heavily from [MIRNet](https://github.com/swz30/MIRNet) and [SwinTransformer](https://github.com/microsoft/Swin-Transformer).
 
 
