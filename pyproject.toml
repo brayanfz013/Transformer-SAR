@@ -40,7 +40,7 @@ linformer = "^0.2.3"
 timm = "^0.9.16"
 ptflops = "^0.7.2.2"
 tornado = "^6.4"
-jupyterlab = "^4.2.0"
+jupyterlab = "^4.2.5"
 
 [[tool.poetry.source]]
 
