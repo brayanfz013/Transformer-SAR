@@ -7,8 +7,8 @@ manual_seed: 100
 is_train: true
 
 preprocessing:
-  image-path-raw: "/home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/raw_data"
-  output: "/home/arthemis/Documents/pytorch_env/pytorch_env/transformers_ruben/src/data/transformed_data/"
+  image-path-raw: "/mnt/data extra/modelos_sar/images/Ground Truth"
+  output: "/mnt/data extra/modelos_sar/output/inference"
   train-split-percentage: 0.8
 
 datasets:
